@@ -1,10 +1,10 @@
 import { useRef, useState, type FormEvent, type MouseEvent } from 'react'
 import { ArrowIcon } from './ArrowIcon'
 
-const CONTACT_EMAIL = 'hello@xscodedev.com'
+const CONTACT_EMAIL = 'xscodedev@gmail.com'
 // Static site, no backend: messages post to a hosted form service (Formspree).
-// The form id is public, not a secret. Swap for a dedicated xscodedev form when ready.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwvywobk'
+// The form id is public, not a secret.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqpakrzk'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -82,7 +82,7 @@ export function Contact() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...values, _replyto: values.email }),
+        body: JSON.stringify({ ...values, _subject: `Website contact: ${values.subject}` }),
       })
       if (!res.ok) throw new Error('Request failed')
       setSuccess('Your message was sent. We will get back to you soon.')
